@@ -1,6 +1,10 @@
 package com.example.builder_example;
 
 import java.math.BigInteger;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 
 /**
@@ -14,11 +18,13 @@ public class HelloWorld {
         System.out.println("Hello,World");
 
         NutritionFacts2 cocaCola = new NutritionFacts2.Builder(240, 8).calories(100).sodium(35).carbohydrate(27).build();
+
         HashSet<NutritionFacts2> cocaColaBox = new HashSet<>();
         cocaColaBox.add(cocaCola);
         cocaColaBox.add(new NutritionFacts2.Builder(234,1).calories(12).build());
 
         int sum = cocaColaBox.stream().mapToInt(NutritionFacts2::getCalories).sum();
+        System.out.println(cocaColaBox.size());
         System.out.println(sum);
 
 
@@ -26,6 +32,29 @@ public class HelloWorld {
         NutritionFacts pepsi = new NutritionFacts(130,32);
         System.out.println(cocaCola.toString());
         System.out.println(pepsi.toString());
+
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        System.out.println(dateFormat.format(date)); //2016/11/16 12:08:43
+
+        PaymentRegistry.Builder builder;
+
+        builder = new PaymentRegistry.Builder(date);
+        builder.setPaymentRow("vkdkdkd","djkdkjdk");
+        builder.setPaymentRow("123","123");
+        builder.setPaymentRow("djsdkjflkjdf", "kjdjsjdflkjsal");
+        PaymentRegistry registry = builder.build();
+        System.out.println(registry);
+
+
+
+
+//                                  .queryParams(queryParams);
+//        for (MultiPartSpecification multiPart:bodyParams.values()) {
+//            requestSpecification = requestSpecification.multiPart(multiPart);
+//        }
+
 
     }
 
