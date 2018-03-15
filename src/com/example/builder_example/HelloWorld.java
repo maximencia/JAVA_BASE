@@ -41,9 +41,9 @@ public class HelloWorld {
         PaymentRegistry.Builder builder;
 
         builder = new PaymentRegistry.Builder(date);
-        builder.setPaymentRow("vkdkdkd","djkdkjdk");
-        builder.setPaymentRow("123","123");
-        builder.setPaymentRow("djsdkjflkjdf", "kjdjsjdflkjsal");
+        builder.setPaymentRow("vkdkdkd",12.2);
+        builder.setPaymentRow("123",12.3);
+        builder.setPaymentRow("djsdkjflkjdf", 12.4);
         PaymentRegistry registry = builder.build();
         System.out.println(registry);
 

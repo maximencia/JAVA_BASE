@@ -12,8 +12,8 @@ public class PaymentRegistry {
 
     Date registryDate;
     long paymentCount;
-    int paymentSum;
-    HashMap<String,String> paymentRows;
+    double paymentSum;
+    HashMap<String,Double> paymentRows;
 
 
     static public class Builder{
@@ -21,25 +21,28 @@ public class PaymentRegistry {
         Date registryDate;
         long paymentCount;
         double paymentSum;
-        HashMap<String,String> paymentRows;
+        HashMap<String,Double> paymentRows;
 
         public Builder(Date registryDate){
-            this.paymentRows =  new HashMap<String,String>();
+            this.paymentRows =  new HashMap<String,Double>();
             this.registryDate = registryDate;
         }
 
-        public void  setPaymentRow(String receriptNumber, String paymentRow){
-            paymentRows.putIfAbsent(receriptNumber,paymentRow);
+        public void  setPaymentRow(String receriptNumber, Double paymentRow){
+            paymentRows.put(receriptNumber,paymentRow);
         }
 
-        private int  calculateTotalAmount() {
-            return 777;
+        private double  calculateTotalAmount(HashMap<String, Double> paymentRows) {
+            for (Double value : paymentRows.values()) {
+                paymentSum  += value;
+            }
+            return paymentSum;
         }
 
         public PaymentRegistry build () {
 
             this.paymentCount = paymentRows.size();
-            this.paymentSum = calculateTotalAmount();
+            this.paymentSum = calculateTotalAmount(paymentRows);
             return  new PaymentRegistry(this);
 
         }
@@ -53,6 +56,7 @@ public class PaymentRegistry {
         this.paymentCount = builder.paymentCount;
         this.paymentRows = builder.paymentRows;
         this.registryDate=builder.registryDate;
+        this.paymentSum=builder.paymentSum;
         // and so on ....
     }
     @Override
